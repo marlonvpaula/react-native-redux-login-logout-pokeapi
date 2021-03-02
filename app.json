@@ -1,0 +1,12 @@
+{
+  "name": "TestTotvs",
+  "displayName": "TestTotvs",
+  "expo": {
+    "name": "TestTotvs",
+    "slug": "TestTotvs",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
