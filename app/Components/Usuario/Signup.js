@@ -2,18 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, StyleSheet, TextInput, Button } from 'react-native';
 import { openDatabase } from 'react-native-sqlite-storage';
 
-
+// Abertura do banco de dados SQLite
 const db = openDatabase({ name: 'UserDatabase.db' });
 
+// Tela de cadatro de Usuario
 const Signup = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const onPressCreate = () => {
-    props.navigation.navigate('Home');
-  }
-
 
 
   const onRegisterPress = () => {
@@ -25,6 +21,8 @@ const Signup = (props) => {
         alert('Senha e Confirmação de Senha não são iguais!');
         return;
     }
+    
+    // Validações se o usuário existe ou não e cadastro de novo Usuário, controle apenas interno do aplicativo
     db.transaction((tx) => {
         let sql = `SELECT * FROM users WHERE username='${username}'`;
         tx.executeSql(sql, [], (tx, results) => {

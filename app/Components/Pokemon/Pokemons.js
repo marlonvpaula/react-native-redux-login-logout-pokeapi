@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, StyleSheet, TextInput, Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
+// Tela de Listagem de Pokemons
 const Pokemons = (props) => {
   const [pokemons, setPokemons] = useState([]);
   const [searchfeild, setSearchfeild] = useState('');
@@ -15,7 +16,7 @@ const Pokemons = (props) => {
     fetchPokemons();
   }, []);
 
-  
+  // Buscando os primeiros 500 Pokemons
   const fetchPokemons = () => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=500')
       .then(response => response.json())

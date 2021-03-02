@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
 
+// Tela de Detalhes dos Pokemons
 const Details = props => {
   const [details, setDetails] = useState([]);
 

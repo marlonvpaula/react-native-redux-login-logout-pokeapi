@@ -11,6 +11,7 @@ import Signup from './app/Components/Usuario/Signup';
 import Pokemons from './app/Components/Pokemon/Pokemons';
 import Details from './app/Components/Pokemon/Details';
 
+// Cadastro de Navegações do Sistema
 const appNavigator = createStackNavigator({
   Entrar: {
     screen: Signin,
@@ -36,7 +37,7 @@ const appNavigator = createStackNavigator({
     headerRight: () => {
       const isAuthenticated = useSelector(state => state.isAuthenticated);
       const dispatch = useDispatch();
-
+      // Validações de Usuário logado para mostrar ou não o botão de Sair
       return (
         isAuthenticated?<Button
           title="Sair"

@@ -4,6 +4,7 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import { openDatabase } from 'react-native-sqlite-storage';
 import { useSelector, useDispatch } from 'react-redux';
 
+// Tela Inicial para Entrar no Aplicativo
 const Signin = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -12,6 +13,7 @@ const Signin = (props) => {
   const db = openDatabase({ name: 'UserDatabase.db' });
   
   useEffect(() => {
+    // Criação de Tabela Usuário
     db.transaction(function (txn) {
       txn.executeSql(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='users'",
@@ -32,31 +34,32 @@ const Signin = (props) => {
 
 
   const onLoginPress = () => {
-      if (username === '' || password === '') {
-        alert('Por favor informe seu Usuário e Senha!');
-        return;
-      }
-      db.transaction((tx) => {
-        const sql = `SELECT * FROM users WHERE username='${username}'`;
-        tx.executeSql(sql, [], (tx, results) => {
-          const len = results.rows.length;
-          if (!len) {
-            alert('Este usuário não existe!');
-          } else {
-            const row = results.rows.item(0);
-            if (password === row.password) {
-              dispatch({ type: 'LOGIN'});
-              const resetAction = StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'Pokemons' })],
-              });
-              props.navigation.dispatch(resetAction);
-              return;
-            }
-            alert('Usuário ou senha inválidos!');
+    // Validações se o usuário existe ou não e login de Usuário, controle apenas interno do aplicativo
+    if (username === '' || password === '') {
+      alert('Por favor informe seu Usuário e Senha!');
+      return;
+    }
+    db.transaction((tx) => {
+      const sql = `SELECT * FROM users WHERE username='${username}'`;
+      tx.executeSql(sql, [], (tx, results) => {
+        const len = results.rows.length;
+        if (!len) {
+          alert('Este usuário não existe!');
+        } else {
+          const row = results.rows.item(0);
+          if (password === row.password) {
+            dispatch({ type: 'LOGIN'});
+            const resetAction = StackActions.reset({
+              index: 0,
+              actions: [NavigationActions.navigate({ routeName: 'Pokemons' })],
+            });
+            props.navigation.dispatch(resetAction);
+            return;
           }
-        });
+          alert('Usuário ou senha inválidos!');
+        }
       });
+    });
   }
 
   return (

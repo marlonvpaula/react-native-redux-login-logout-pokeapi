@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 const INITIAL_STATE = {
   isAuthenticated: false
 }
-
+// Controle de Estado para Usuário Logado
 function login(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'LOGIN':
