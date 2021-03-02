@@ -1,5 +1,5 @@
 
-## react-native-redux-login-logout-pokeapi
+## react-native-redux-pokeapi
 
 App example of React-native Hooks with Redux, SQLite and pokeapi
 

@@ -43,7 +43,13 @@ const appNavigator = createStackNavigator({
           color='#263238'
           onPress={() => {
             dispatch({ type: 'LOGOUT'})
-            navigation.navigate('Entrar')
+            
+            const resetAction = StackActions.reset({
+              index: 0,
+              actions: [NavigationActions.navigate({ routeName: 'Entrar' })],
+            });
+            navigation.dispatch(resetAction);
+            return;
           }}
         />:''
     )},
